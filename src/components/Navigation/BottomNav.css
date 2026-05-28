@@ -1,0 +1,36 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 70px;
+  background-color: #F9F9F9;
+  border-top: 1px solid #D1D1D6;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 10px; /* Для безопасной зоны iPhone */
+  z-index: 900;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  color: #8E8E93;
+}
+
+.nav-item.active {
+  color: #2F80ED;
+}
+
+.nav-item .icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.nav-item .label {
+  font-size: 11px;
+  font-weight: 500;
+}
