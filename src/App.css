@@ -5,6 +5,7 @@
 
 body {
   margin: 0;
+  width: 100%;
   background-color: #f0f0f2;
   display: flex;
   justify-content: center;
@@ -13,7 +14,7 @@ body {
 .app-container {
   background-color: #ffffff;
   width: 100vw;
-  max-width: 450px;
+  max-width: 100%;
   height: 100vh;
   position: relative;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);

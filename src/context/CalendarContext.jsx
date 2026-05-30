@@ -7,19 +7,30 @@ export const useCalendar = () => useContext(CalendarContext);
 
 export const CalendarProvider = ({ children }) => {
   const [currentView, setCurrentView] = useState('month'); // 'month' | 'day'
-  const [currentDate, setCurrentDate] = useState(new Date(2024, 2, 14)); // Март 14, 2024 (как на макете)
+  const [currentDate, setCurrentDate] = useState(new Date()); // Текущая дата вместо фиксированной
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isReactionOpen, setIsReactionOpen] = useState(false);
   
-  // Изначальные данные по событиям из ваших макетов
+  // Функция для получения сегодняшней даты в формате YYYY-MM-DD
+  const getTodayString = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
+  const todayString = getTodayString();
+  
+  // Изначальные данные по событиям
   const [events, setEvents] = useState([
     {
       id: '1',
       title: 'Deep Work Session: Project X Design',
-      startDate: '2024-03-14',
+      startDate: todayString, // Используем сегодняшнюю дату
       startTime: '09:00',
-      endDate: '2024-03-14',
+      endDate: todayString,
       endTime: '12:00',
       color: '#4FA5F2', // Синий
       allDay: false,
@@ -28,9 +39,9 @@ export const CalendarProvider = ({ children }) => {
     {
       id: '2',
       title: 'Team Lunch',
-      startDate: '2024-03-14',
+      startDate: todayString,
       startTime: '12:00',
-      endDate: '2024-03-14',
+      endDate: todayString,
       endTime: '12:45',
       color: '#E0E0E0', // Серый
       allDay: false,
@@ -39,9 +50,9 @@ export const CalendarProvider = ({ children }) => {
     {
       id: '3',
       title: 'Client Review for Alpha Prototype',
-      startDate: '2024-03-14',
+      startDate: todayString,
       startTime: '13:00',
-      endDate: '2024-03-14',
+      endDate: todayString,
       endTime: '14:30',
       color: '#2ECC71', // Зеленый
       allDay: false,
@@ -50,9 +61,9 @@ export const CalendarProvider = ({ children }) => {
     {
       id: '4',
       title: 'Feedback Session with Engineering',
-      startDate: '2024-03-14',
+      startDate: todayString,
       startTime: '15:00',
-      endDate: '2024-03-14',
+      endDate: todayString,
       endTime: '16:00',
       color: '#BB86FC', // Фиолетовый
       allDay: false,
@@ -62,7 +73,7 @@ export const CalendarProvider = ({ children }) => {
 
   // Реакции для дней (Ключ: YYYY-MM-DD -> Массив эмодзи)
   const [dayReactions, setDayReactions] = useState({
-    '2024-03-14': ['😊', '🚀', '💡', '🎉']
+    [todayString]: ['😊', '🚀', '💡', '🎉'] // Привязываем к сегодняшней дате
   });
 
   const addEvent = (newEvent) => {
